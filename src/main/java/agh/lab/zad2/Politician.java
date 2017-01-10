@@ -1,23 +1,17 @@
 package agh.lab.zad2;
 
-import org.json.JSONObject;
-
 public class Politician {
-	
-	private JSONObject politician;
-	private JSONObject politicianCostRepair;
-	
-	public Politician (JSONObject politician ,JSONObject politicianCostRepair){
-		this.politician=politician;
-		this.politicianCostRepair=politicianCostRepair;
+	private String name;
+
+	public Politician(String name) {
+		super();
+		this.name = name;
 	}
 
-	public JSONObject getPolitician() {
-		return politician;
+	@Override
+	public String toString() {
+		return name;
 	}
-
-	public JSONObject getPoliticianCostRepair() {
-		return politicianCostRepair;
-	}
+	
 	
 }
