@@ -1,24 +1,14 @@
 package agh.lab.zad2;
 
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
-import java.io.Writer;
 import java.net.URL;
 import java.nio.charset.Charset;
-import java.nio.file.Files;
 import java.util.ArrayList;
-import java.util.Iterator;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -83,7 +73,6 @@ public class DataDownloader {
 		} else {
 
 			politicianExpensesAndTrips = readFromFile();
-			// selectedPolitician = getPolitician(politicianExpensesAndTrips);
 
 			ArrayList<JSONObject> allData = readAllDataforTerm();
 			selectedPolitician = extractPoliticianAndDownloadCostRepair(allData);
@@ -108,9 +97,10 @@ public class DataDownloader {
 			jsonObjects.add(jsonArray.getJSONObject(i));
 		}
 
-		if (arguments.numberTerm == "7") {
+		if (arguments.numberTerm.equals("7")) {
 			json = readJsonFromUrl(ADDRES + CONDITION + arguments.numberTerm + PAGE_SECOND);
 			jsonArray = json.getJSONArray("Dataobject");
+			
 
 			for (int i = 0; i < jsonArray.length(); i++) {
 				jsonObjects.add(jsonArray.getJSONObject(i));
@@ -181,17 +171,6 @@ public class DataDownloader {
 		return politiciansExpensesAndTrips;
 	}
 
-	private ArrayList<JSONObject> downloadTrips(ArrayList<Integer> politiciansIDs) throws IOException, JSONException {
-		Main.LOGGER.info("Start downloading data about politicians TRIPS");
-		ArrayList<JSONObject> politiciansTrips = new ArrayList<JSONObject>(500);
-		JSONObject tmpObject = null;
-		for (Integer id : politiciansIDs) {
-			tmpObject = readJsonFromUrl(ADDRES + id.toString() + TRIPS);
-			politiciansTrips.add(tmpObject);
-		}
-		Main.LOGGER.info("Finished downloading data about politicians TRIPS");
-		return politiciansTrips;
-	}
 
 	private SelectedPolitician getPolitician(ArrayList<JSONObject> politicianData) throws JSONException {
 		JSONObject jsObject = null;
@@ -201,7 +180,7 @@ public class DataDownloader {
 			String name = jsObject.getString("poslowie.imie_pierwsze");
 			String lastname = jsObject.getString("poslowie.nazwisko");
 			if (arguments.firstname.equalsIgnoreCase(name) && arguments.lastname.equalsIgnoreCase(lastname)) {
-				Main.LOGGER.debug("Downloaded politician = " + politician.toString());
+				Main.LOGGER.debug("Found selected politician = " + politician.toString());
 				return new SelectedPolitician(politician);
 			}
 

@@ -2,16 +2,13 @@ package agh.lab.zad2;
 
 import java.util.ArrayList;
 
-import javax.print.Doc;
-import javax.print.attribute.DocAttribute;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 public class JsonData {
 
-	public static final int INDEX_COST_REPAIR = 12;
+	private static final int INDEX_COST_REPAIR = 12;
 
 	private ArrayList<JSONObject> politiciansExpensesAndTrips;
 	private SelectedPolitician selectedPolitician;
@@ -125,8 +122,6 @@ public class JsonData {
 	}
 
 	private double getSumOfCostsInYear(JSONArray politicianCost) throws JSONException {
-		if (politicianCost == null)
-			return 0;
 		double sum = 0;
 		for (int i = 0; i < politicianCost.length(); i++) {
 			sum += politicianCost.optDouble(i, 0);
@@ -186,9 +181,7 @@ public class JsonData {
 
 	private PoliticianWithCostTrips extractPoliticianWithTheMostExpensiveTrip() throws JSONException {
 		double maxCostOfTrips = 0;
-
 		String name = "";
-
 		double costOfTrip;
 
 		for (JSONObject politician : politiciansExpensesAndTrips) {
@@ -216,7 +209,9 @@ public class JsonData {
 		String countryOfTrip;
 		String name;
 		for (JSONObject politician : politiciansExpensesAndTrips) {
+			
 			JSONArray pTrips = getPoliticianTrips(politician);
+			
 			for (int i = 0; i < pTrips.length(); i++) {
 				countryOfTrip = getCountryOfTrip(pTrips.getJSONObject(i));
 
