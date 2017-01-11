@@ -20,6 +20,7 @@ public class Main {
 			LOGGER.warn(e);
 			System.exit(1);
 		}
+		
 		LOGGER.info("Launched app with parameters: " + arguments.numberTerm + " " + arguments.firstname + " " + arguments.lastname );
 		
 		DataDownloader dataDownloader = new DataDownloader(arguments);

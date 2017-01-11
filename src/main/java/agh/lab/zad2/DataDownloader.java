@@ -44,7 +44,6 @@ public class DataDownloader {
 		} finally {
 			is.close();
 		}
-
 	}
 
 	public DataDownloader(Arguments arguments) {
@@ -72,7 +71,6 @@ public class DataDownloader {
 			selectedPolitician = getPolitician(politicianExpensesAndTrips);
 		} else {
 
-			politicianExpensesAndTrips = readFromFile();
 
 			ArrayList<JSONObject> allData = readAllDataforTerm();
 			selectedPolitician = extractPoliticianAndDownloadCostRepair(allData);
