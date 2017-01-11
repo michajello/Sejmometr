@@ -39,6 +39,7 @@ public class ArgumentsParser {
 				matcher = wordPattern.matcher(lastname);
 				if (!matcher.matches())
 					throw new IllegalArgumentException("Nazwisko zawiera niedozwolone znaki");
+				
 				if (args.length == 4) {
 					String readingFromFileOption = scaner.next();
 					if (!readingFromFileOption.equals("r")) {
